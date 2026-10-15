@@ -132,6 +132,23 @@
   .sticky.show { transform: none; }
   .sticky .btn-wa { max-width: 520px; margin: 0 auto; padding: 15px; font-size: 18px; animation: none; }
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1805113844139223');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -216,6 +233,11 @@
 
   document.querySelectorAll("[data-wa]").forEach(a => a.href = WHATSAPP_LINK);
   document.querySelectorAll("[data-canal]").forEach(a => CANAL_LINK ? a.href = CANAL_LINK : a.remove());
+
+  // Pixel da Meta: conta quem toca para entrar no grupo ou seguir o canal
+  const track = (...args) => { if (window.fbq) fbq(...args); };
+  document.querySelectorAll("[data-wa]").forEach(a => a.addEventListener("click", () => track("track", "Lead", { content_name: "Grupo WhatsApp" })));
+  document.querySelectorAll("[data-canal]").forEach(a => a.addEventListener("click", () => track("trackCustom", "SeguirCanal")));
 
   // Mostra o botão fixo quando o botão principal sai da tela
   const sticky = document.getElementById("sticky");
