@@ -72,10 +72,10 @@
 
   .btn-wa {
     position: relative; display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; margin-top: 14px; padding: 16px 12px; border-radius: 999px;
+    width: 100%; margin-top: 14px; padding: 16px 10px; border-radius: 999px;
     background: linear-gradient(180deg, var(--green), var(--green-2));
     box-shadow: 0 5px 0 var(--green-dark), 0 10px 22px rgba(18,150,69,.3);
-    color: #fff; font-size: clamp(15px, 4.4vw, 19px); font-weight: 900; letter-spacing: .01em;
+    color: #fff; font-size: clamp(13px, 3.9vw, 18px); font-weight: 900; letter-spacing: 0;
     white-space: nowrap; text-decoration: none; transition: transform .1s, box-shadow .1s;
     animation: pulse 2.4s ease-in-out infinite;
   }
@@ -120,12 +120,13 @@
   .arrow svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 
   /* Grupos */
-  .groups { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .groups { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
   .group {
     display: flex; flex-direction: column; align-items: center; gap: 4px;
     padding: 10px 2px 9px; border-radius: 12px; text-decoration: none; color: var(--wine);
     font-size: 12px; font-weight: 900; text-align: center; line-height: 1.1; transition: transform .1s;
   }
+  .group small { font-size: 11px; font-weight: 800; }
   .group:active { transform: scale(.95); }
   .group span { font-size: 26px; line-height: 1; }
   .g-vip { background: #fff1c2; } .g-beleza { background: #ffe0ea; } .g-casa { background: #dff0ff; }
@@ -196,7 +197,7 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
     <p class="lead">A gente garimpa as melhores ofertas e manda direto pra você 🛍️</p>
     <a class="btn-wa" data-wa data-pos="topo" href="#" target="_blank" rel="noopener">
       <svg aria-hidden="true"><use href="#i-wa"/></svg>
-      ENTRE NA NOSSA COMUNIDADE
+      ENTRE NA NOSSA COMUNIDADE AGORA
     </a>
     <div class="trust">
       <span><svg aria-hidden="true"><use href="#i-check"/></svg>100% grátis</span>
@@ -220,7 +221,7 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
       <li class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></li>
       <li class="step"><b class="num">2</b><i class="s2"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M19 8v6M16 11h6"/></svg></i>Toque em<br><b>“Entrar na comunidade”</b></li>
       <li class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></li>
-      <li class="step"><b class="num">3</b><i class="s3"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></i><b>Pronto!</b>É só acompanhar as ofertas 🛍️</li>
+      <li class="step"><b class="num">3</b><i class="s3"><svg viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></svg></i><b>Escolha<br>um grupo</b></li>
     </ol>
   </div>
 
@@ -229,17 +230,16 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
     <div class="pill">ESCOLHA SEUS GRUPOS</div>
     <div class="groups">
       <a class="group g-vip" data-wa data-pos="grupo-vip" href="#" target="_blank" rel="noopener"><span>⭐</span>VIP<br>Ofertas</a>
-      <a class="group g-beleza" data-wa data-pos="grupo-beleza" href="#" target="_blank" rel="noopener"><span>💄</span>Beleza</a>
-      <a class="group g-casa" data-wa data-pos="grupo-casa" href="#" target="_blank" rel="noopener"><span>🏠</span>Casa</a>
-      <a class="group g-natal" data-wa data-pos="grupo-natal" href="#" target="_blank" rel="noopener"><span>🎄</span>Natal</a>
-      <a class="group g-kids" data-wa data-pos="grupo-kids" href="#" target="_blank" rel="noopener"><span>🧸</span>Kids</a>
+      <a class="group g-beleza" data-wa data-pos="grupo-beleza" href="#" target="_blank" rel="noopener"><span>💄</span>Beleza e acessórios</a>
+      <a class="group g-natal" data-wa data-pos="grupo-natal" href="#" target="_blank" rel="noopener"><span>🎄</span>Tudo de Natal</a>
+      <a class="group g-kids" data-wa data-pos="grupo-kids" href="#" target="_blank" rel="noopener"><span>🧸</span>Kids<br><small>(Infantil)</small></a>
     </div>
   </div>
 
   <div class="final">
     <a class="btn-wa" data-wa data-pos="final" href="#" target="_blank" rel="noopener">
       <svg aria-hidden="true"><use href="#i-wa"/></svg>
-      ENTRE NA NOSSA COMUNIDADE
+      ENTRE NA NOSSA COMUNIDADE AGORA
     </a>
   </div>
 
@@ -262,7 +262,7 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
 <div class="sticky" id="sticky">
   <a class="btn-wa" data-wa data-pos="fixo" href="#" target="_blank" rel="noopener">
     <svg aria-hidden="true"><use href="#i-wa"/></svg>
-    ENTRE NA NOSSA COMUNIDADE
+    ENTRE NA NOSSA COMUNIDADE AGORA
   </a>
 </div>
 
