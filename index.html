@@ -203,15 +203,6 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
     <span style="color:#0086ff">Magalu</span>
   </div>
 
-  <!-- Como entrar -->
-  <div class="how">
-    <h2>É fácil entrar</h2>
-    <ol class="steps">
-      <li>Toque no botão verde.</li>
-      <li>Toque em “Entrar na comunidade”.</li>
-      <li>Escolha o Grupo VIP e receba as ofertas.</li>
-    </ol>
-  </div>
 
   <div class="final">
     <a class="btn-wa" data-wa data-pos="final" href="#" target="_blank" rel="noopener">
@@ -247,8 +238,8 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
 
 <script>
   /* ======== EDITE AQUI ======== */
-  // Link de convite da comunidade do WhatsApp
-  const WHATSAPP_LINK = "https://chat.whatsapp.com/FbrTsZgP4coDyJLA1Tnjfe";
+  // Link de convite do Grupo VIP do WhatsApp
+  const WHATSAPP_LINK = "https://chat.whatsapp.com/LNkgmKL580d5pdDcy30Ls7";
 
   // Link do seu canal do WhatsApp (deixe "" para esconder o link do canal)
   const CANAL_LINK = "https://whatsapp.com/channel/0029VbDXkm405MUgra5Rsl1m";
@@ -261,7 +252,7 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
   // "Lead" continua sendo o evento de entrada; content_category diz qual botão foi tocado.
   const track = (...args) => { if (window.fbq) fbq(...args); };
   document.querySelectorAll("[data-wa]").forEach(a => a.addEventListener("click", () =>
-    track("track", "Lead", { content_name: "Comunidade WhatsApp", content_category: a.dataset.pos })));
+    track("track", "Lead", { content_name: "Grupo VIP WhatsApp", content_category: a.dataset.pos })));
   document.querySelectorAll("[data-canal]").forEach(a => a.addEventListener("click", () => track("trackCustom", "SeguirCanal")));
 
   // Mostra o botão fixo quando o botão principal sai da tela
