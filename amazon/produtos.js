@@ -17,10 +17,11 @@
    - link: use só o link gerado no painel do Amazon Associados ou na barra
      SiteStripe (começa com https://amzn.to/ ou https://www.amazon.com.br/).
      Links de outros sites são ignorados e o botão não aparece.
-   - imagem: deixe "" para usar o ícone da categoria. Só coloque uma imagem
-     se ela for SUA (foto que você tirou) ou se veio de um método permitido
-     pelo Amazon Associados (por exemplo, o código de imagem do SiteStripe).
-     Não copie imagens da página da Amazon.
+   - imagem: deixe "" para usar o ícone da categoria. Só são aceitas:
+       * fotos SUAS, enviadas para a pasta amazon/img/ (ex.: "img/fone.jpg");
+       * o endereço da imagem gerado pelo SiteStripe/Amazon Associados
+         (começa com https://m.media-amazon.com/).
+     Qualquer outra imagem é ignorada. Não copie imagens da página da Amazon.
    - Não coloque preço, desconto nem avaliação: eles mudam o tempo todo na
      Amazon e o programa não permite mostrar valores desatualizados.
    - Para tirar um produto, apague o bloco dele (das chaves { até a vírgula }).

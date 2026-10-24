@@ -72,6 +72,8 @@
   .btn { display: block; margin-top: 6px; padding: 10px 8px; border-radius: 12px; background: linear-gradient(180deg, var(--orange), var(--orange-2)); box-shadow: 0 3px 0 var(--orange-dark); color: #fff; font-size: 13.5px; font-weight: 900; text-align: center; text-decoration: none; }
   .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--orange-dark); }
 
+  .sec { grid-column: 1 / -1; margin-top: 10px; font-size: 17px; font-weight: 900; }
+  .sec:first-child { margin-top: 0; }
   .empty { grid-column: 1 / -1; padding: 34px 18px; border-radius: 16px; background: #fff; border: 1px dashed var(--line); text-align: center; font-weight: 700; color: var(--wine-soft); }
   .empty b { display: block; font-size: 18px; font-weight: 900; color: var(--wine); margin-bottom: 4px; }
 
@@ -163,7 +165,16 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
       return u.protocol === "https:" && (u.hostname === "amzn.to" || u.hostname === "amazon.com.br" || u.hostname.endsWith(".amazon.com.br")) ? u.href : "";
     } catch { return ""; }
   };
-  const imagemValida = url => { try { return new URL(url, location.href).protocol === "https:" || !/^[a-z]+:/i.test(url) ? url : ""; } catch { return ""; } };
+  // Imagens permitidas: arquivos seus dentro do site (ex.: "img/produto.jpg") ou
+  // imagens servidas pela própria Amazon via SiteStripe/Associados (m.media-amazon.com).
+  const imagemValida = url => {
+    if (!url) return "";
+    if (!/^[a-z]+:/i.test(url) && !url.startsWith("//")) return url;
+    try {
+      const u = new URL(url);
+      return u.protocol === "https:" && /(^|\.)(media-amazon\.com|ssl-images-amazon\.com)$/.test(u.hostname) ? u.href : "";
+    } catch { return ""; }
+  };
 
   const produtos = (typeof PRODUTOS !== "undefined" ? PRODUTOS : []).filter(p => p && p.nome && linkAmazon(p.link));
   const usadas = Object.keys(CATEGORIAS).filter(k => produtos.some(p => p.categoria === k));
@@ -182,19 +193,28 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
       grid.innerHTML = `<div class="empty"><b>Novos achadinhos chegando em breve</b>Enquanto isso, as ofertas do dia estão no nosso Grupo VIP do WhatsApp.</div>`;
       return;
     }
-    grid.innerHTML = lista.map(p => {
+    const cartao = p => {
       const c = CATEGORIAS[p.categoria] || { nome: "Achadinho", icone: "🛍️" };
-      const img = p.imagem && imagemValida(p.imagem);
+      const img = imagemValida(p.imagem);
       return `<article class="card">
         <div class="thumb">${img ? `<img src="${esc(img)}" alt="${esc(p.nome)}" loading="lazy">` : `<span aria-hidden="true">${c.icone}</span>`}</div>
         <div class="body">
           <span class="tag">${esc(c.nome)}</span>
           <h2>${esc(p.nome)}</h2>
           <p>${esc(p.descricao)}</p>
-          <a class="btn" href="${esc(linkAmazon(p.link))}" target="_blank" rel="sponsored noopener" data-produto="${esc(p.nome)}">Ver produto na Amazon</a>
+          <a class="btn" href="${esc(linkAmazon(p.link))}" target="_blank" rel="sponsored noopener" data-produto="${esc(p.nome)}">Ver na Amazon</a>
         </div>
       </article>`;
-    }).join("");
+    };
+    // Em "Todas", mostra os produtos agrupados por categoria, cada grupo com um título.
+    if (atual === "todas" && usadas.length > 1) {
+      const outros = lista.filter(p => !CATEGORIAS[p.categoria]);
+      grid.innerHTML = usadas.map(k =>
+        `<h3 class="sec">${CATEGORIAS[k].icone} ${esc(CATEGORIAS[k].nome)}</h3>` + lista.filter(p => p.categoria === k).map(cartao).join("")
+      ).join("") + (outros.length ? `<h3 class="sec">🛍️ Outros achadinhos</h3>` + outros.map(cartao).join("") : "");
+    } else {
+      grid.innerHTML = lista.map(cartao).join("");
+    }
   }
 
   cats.addEventListener("click", e => {
@@ -202,7 +222,7 @@ src="https://www.facebook.com/tr?id=1805113844139223&ev=PageView&noscript=1"
     atual = b.dataset.cat; renderCats(); renderGrid();
   });
 
-  // Pixel: conta quando a pessoa toca em "Ver produto na Amazon" (sem dados pessoais).
+  // Pixel: conta quando a pessoa toca em "Ver na Amazon" (sem dados pessoais).
   grid.addEventListener("click", e => {
     const a = e.target.closest(".btn");
     if (a && window.fbq) fbq("trackCustom", "CliqueAmazon", { content_name: a.dataset.produto });
